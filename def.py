@@ -23,8 +23,15 @@ while command != 'exit':
                       'w',  
                       newline="")) 
         for r in ws.rows: 
-            col.writerow([cell.value for cell in r])  
+            col.writerow([cell.value for cell in r])
         
+        import pandas as pd  
+        read_file = pd.read_excel ("example.xlsx") 
+        read_file.to_csv ("Test.csv",  
+                  index = None, 
+                  header=True) 
+        df = pd.DataFrame(pd.read_csv("Test.csv")) 
+        df
     
     def info():
         print("'save' - сохранить изминения \
@@ -67,7 +74,6 @@ while command != 'exit':
         if row[0] is None or isinstance(row[0], (str)) == True:
             izi = 0
         else:
-            print(type(row[0]))
             izi = (row[0])
         now = datetime.now()
         today = date.today()
@@ -80,8 +86,9 @@ while command != 'exit':
         d1 = int(input("Ведите какую строку изменить: "))
         d12 = input("Ведите новые данные: ")
         now = datetime.now()
+        today = date.today()
         ws.cell(row=d1, column=3, value=d12)
-        ws.cell(row=d1, column=4, value="{}.{}.{}  {}:{}".format(now.day, now.month, now.year, now.hour, now.minute))
+        ws.cell(row=d1, column=4, value = "{}  {}:{}".format(today, now.hour, now.minute))
         print("Заметка успешно изменена")
 
     def delite():
